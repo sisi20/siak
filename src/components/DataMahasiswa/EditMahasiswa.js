@@ -16,7 +16,8 @@ import {
   Box,
   Button,
   Typography,
-  Autocomplete
+  Autocomplete,
+  Stack
 } from '@material-ui/core';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -84,9 +85,13 @@ const AccountProfileDetails = (props) => {
     form.append('id_prodi', Prd._id);
 
     axios
-      .put(`https://limitless-ocean-86312.herokuapp.com/api/datamhs/${id}`, form, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
+      .put(
+        `https://limitless-ocean-86312.herokuapp.com/api/datamhs/${id}`,
+        form,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        }
+      )
       .then((result) => {
         navigate('/app/dataMahasiswa');
         console.warn('responMahasiswa', result);
@@ -175,8 +180,11 @@ const AccountProfileDetails = (props) => {
     console.log(newdata);
   }
 
+  function batal() {
+    navigate('/app/dataMahasiswa');
+  }
   return (
-    <form autoComplete="off" noValidate {...props} onSubmit={(e) => submit(e)}>
+    <form autoComplete="off" {...props} onSubmit={(e) => submit(e)}>
       <Card>
         <CardHeader
           subheader="Lengkapi Data Berikut"
@@ -237,6 +245,7 @@ const AccountProfileDetails = (props) => {
                           {...params}
                           label="Program Studi"
                           placeholder="Pilih Prodi"
+                          focused
                         />
                       )}
                     />
@@ -271,6 +280,7 @@ const AccountProfileDetails = (props) => {
                           {...params}
                           label="Provinsi"
                           placeholder="Pilih Provinsi"
+                          focused
                         />
                       )}
                     />
@@ -291,6 +301,7 @@ const AccountProfileDetails = (props) => {
                           {...params}
                           label="Kota"
                           placeholder="Pilih Kota"
+                          focused
                         />
                       )}
                     />
@@ -308,6 +319,7 @@ const AccountProfileDetails = (props) => {
                           {...params}
                           label="Kecamatan"
                           placeholder="Pilih Kecamatan"
+                          focused
                         />
                       )}
                     />
@@ -317,6 +329,7 @@ const AccountProfileDetails = (props) => {
                       fullWidth
                       label="Kode Pos"
                       name="kodepos"
+                      type="number"
                       onChange={(e) => handel(e)}
                       required
                       value={Mahasiswa.kodepos}
@@ -368,6 +381,7 @@ const AccountProfileDetails = (props) => {
                           {...params}
                           label="Provinsi"
                           placeholder="Pilih Provinsi"
+                          focused
                         />
                       )}
                     />
@@ -388,6 +402,7 @@ const AccountProfileDetails = (props) => {
                           {...params}
                           label="Kota"
                           placeholder="Pilih Kota"
+                          focused
                         />
                       )}
                     />
@@ -405,6 +420,7 @@ const AccountProfileDetails = (props) => {
                           {...params}
                           label="Kecamatan"
                           placeholder="Pilih Kecamatan"
+                          focused
                         />
                       )}
                     />
@@ -414,6 +430,7 @@ const AccountProfileDetails = (props) => {
                       fullWidth
                       label="Kode Pos"
                       name="kodeposs"
+                      type="number"
                       onChange={(e) => handel(e)}
                       required
                       value={Mahasiswa.kodeposs}
@@ -503,6 +520,7 @@ const AccountProfileDetails = (props) => {
                           {...params}
                           label="Kelas"
                           placeholder="Pilih Kelas"
+                          focused
                         />
                       )}
                     />
@@ -521,9 +539,14 @@ const AccountProfileDetails = (props) => {
             p: 2
           }}
         >
-          <Button color="primary" variant="contained" type="submit">
-            Save details
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Button color="primary" variant="contained" onClick={() => batal()}>
+              Batal
+            </Button>
+            <Button color="primary" variant="contained" type="submit">
+              Save details
+            </Button>
+          </Stack>
         </Box>
       </Card>
     </form>

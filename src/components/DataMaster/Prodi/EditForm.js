@@ -7,7 +7,8 @@ import {
   CardHeader,
   Divider,
   Grid,
-  TextField
+  TextField,
+  Stack
 } from '@material-ui/core';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -50,11 +51,15 @@ const AccountProfileDetails = (props) => {
     setContent(newdata);
     console.log(newdata);
   }
+
+  function batal() {
+    history('/app/prodi');
+  }
   /* eslint no-underscore-dangle: 0 */
   return (
-    <form autoComplete="off" noValidate {...props} onSubmit={(e) => submit(e)}>
+    <form autoComplete="off" {...props} onSubmit={(e) => submit(e)}>
       <Card>
-        <CardHeader subheader="Lengkapi Data Berikut" title="Tambah Prodi" />
+        <CardHeader subheader="Lengkapi Data Berikut" title="Edit Prodi" />
         <Divider />
         <CardContent>
           <Grid container spacing={3}>
@@ -81,9 +86,14 @@ const AccountProfileDetails = (props) => {
             p: 2
           }}
         >
-          <Button color="primary" variant="contained" type="submit">
-            Save details
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Button color="primary" variant="contained" onClick={() => batal()}>
+              Batal
+            </Button>
+            <Button color="primary" variant="contained" type="submit">
+              Save details
+            </Button>
+          </Stack>
         </Box>
       </Card>
     </form>

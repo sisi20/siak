@@ -72,6 +72,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.nim}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -81,6 +82,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.nama_depan}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -90,15 +92,16 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.nama_belakang}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
                   <TextField
                     fullWidth
                     label="Program Studi"
-                    value={dataMahasiswa.id_prodi}
+                    value={dataMahasiswa.id_prodi.nama_prodi}
                     required
-                    variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -107,6 +110,7 @@ const AccountProfileDetails = () => {
                     label="E-MAIL"
                     value={dataMahasiswa.email}
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -119,6 +123,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.provinsimu}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={4} xs={12}>
@@ -128,6 +133,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.kotamu}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={4} xs={12}>
@@ -137,6 +143,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.kecamatanmu}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -146,6 +153,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.kodepos}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -155,6 +163,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.alamatmu}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -167,6 +176,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.noTelp}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -179,6 +189,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.provinsi}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={4} xs={12}>
@@ -188,6 +199,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.kota}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={4} xs={12}>
@@ -197,6 +209,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.kecamatan}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -206,6 +219,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.kodeposs}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -215,6 +229,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.alamatOrtu}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
               </Grid>
@@ -238,6 +253,7 @@ const AccountProfileDetails = () => {
                     value={dataMahasiswa.nik}
                     required
                     variant="outlined"
+                    focused
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -260,13 +276,13 @@ const AccountProfileDetails = () => {
                     </RadioGroup>
                   </FormControl>
                 </Grid>
-                <Grid item md={6} xs={12}>
+                <Grid item md={12} xs={12}>
                   <TextField
                     fullWidth
                     label="Kelas"
-                    value={dataMahasiswa.id_kelas}
+                    value={dataMahasiswa.id_kelas.kelas}
                     required
-                    variant="outlined"
+                    focused
                   />
                 </Grid>
               </Grid>

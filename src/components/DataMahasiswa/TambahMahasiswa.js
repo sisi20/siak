@@ -16,10 +16,24 @@ import {
   RadioGroup,
   TextField,
   Autocomplete,
-  Typography
+  Typography,
+  Stack,
+  Modal
 } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4
+};
 
 const AccountProfileDetails = (props) => {
   const [Mahasiswa, setMahasiswa] = useState({
@@ -46,7 +60,9 @@ const AccountProfileDetails = (props) => {
     foto: null,
     image: null
   });
-
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
   const [Kls, setKls] = useState('');
   const [Kcmtn, setKcmtn] = useState('');
   const [Kcmtnmu, setKcmtnmu] = useState('');
@@ -74,9 +90,14 @@ const AccountProfileDetails = (props) => {
       .post('https://limitless-ocean-86312.herokuapp.com/api/datamhs', form, {
         headers: { 'Content-Type': 'multipart/form-data' }
       })
-      .then((result) => {
+      .then(() => {
         navigate('/app/dataMahasiswa');
-        console.warn('responMahasiswa', result);
+      })
+      .catch((err) => {
+        if (err.response.status === 412) {
+          handleOpen();
+        }
+        console.log('res', err);
       });
   }
 
@@ -163,7 +184,7 @@ const AccountProfileDetails = (props) => {
   }
 
   return (
-    <form autoComplete="off" noValidate {...props} onSubmit={(e) => submit(e)}>
+    <form autoComplete="off" {...props} onSubmit={(e) => submit(e)}>
       <Card>
         <CardHeader
           subheader="Lengkapi Data Berikut"
@@ -304,6 +325,7 @@ const AccountProfileDetails = (props) => {
                       fullWidth
                       label="Kode Pos"
                       name="kodepos"
+                      type="number"
                       onChange={(e) => handel(e)}
                       required
                       value={Mahasiswa.kodepos}
@@ -401,6 +423,7 @@ const AccountProfileDetails = (props) => {
                       fullWidth
                       label="Kode Pos"
                       name="kodeposs"
+                      type="number"
                       onChange={(e) => handel(e)}
                       required
                       value={Mahasiswa.kodeposs}
@@ -513,6 +536,23 @@ const AccountProfileDetails = (props) => {
           </Button>
         </Box>
       </Card>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Data yang anda masukkan sudah ada
+          </Typography>
+          <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+            <Button variant="outlined" onClick={handleClose}>
+              Keluar
+            </Button>
+          </Stack>
+        </Box>
+      </Modal>
     </form>
   );
 };

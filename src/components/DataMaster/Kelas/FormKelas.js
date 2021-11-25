@@ -8,15 +8,33 @@ import {
   Divider,
   Grid,
   TextField,
-  Autocomplete
+  Autocomplete,
+  Stack,
+  Typography,
+  Modal
 } from '@material-ui/core';
 
 import { useNavigate } from 'react-router-dom';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4
+};
 
 const AccountProfileDetails = (props) => {
   const [kelas, setKelas] = useState('');
   const [kodeMatkul, setMatkul] = useState([]);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
 
   function submit(e) {
     e.preventDefault();
@@ -29,10 +47,14 @@ const AccountProfileDetails = (props) => {
         id_matakuliah: kodeMatkul
       })
     }).then((result) => {
-      result.json().then((res) => {
-        navigate('/app/kelas');
-        console.warn('res', res);
-      });
+      if (result.status === 412) {
+        handleOpen();
+      } else {
+        result.json().then((res) => {
+          navigate('/app/kelas');
+          console.warn('res', res);
+        });
+      }
     });
   }
 
@@ -51,9 +73,9 @@ const AccountProfileDetails = (props) => {
   }, []);
 
   return (
-    <form autoComplete="off" noValidate {...props} onSubmit={(e) => submit(e)}>
+    <form autoComplete="off" {...props} onSubmit={(e) => submit(e)}>
       <Card>
-        <CardHeader subheader="Lengkapi Data Berikut" title="Edit Kelas" />
+        <CardHeader subheader="Lengkapi Data Berikut" title="Tambah Kelas" />
         <Divider />
         <CardContent>
           <Grid container spacing={3}>
@@ -84,7 +106,7 @@ const AccountProfileDetails = (props) => {
                   <TextField
                     {...params}
                     label="Matakuliah"
-                    placeholder="Favorites"
+                    placeholder="Pilih Matakuliah"
                   />
                 )}
               />
@@ -105,6 +127,23 @@ const AccountProfileDetails = (props) => {
           </Button>
         </Box>
       </Card>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Data yang anda masukkan sudah ada
+          </Typography>
+          <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+            <Button variant="outlined" onClick={handleClose}>
+              Keluar
+            </Button>
+          </Stack>
+        </Box>
+      </Modal>
     </form>
   );
 };

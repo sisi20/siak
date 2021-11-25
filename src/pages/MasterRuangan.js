@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { Box, Container } from '@material-ui/core';
-import CustomerListToolbar from '../components/DataMaster/Ruangan/CustomerListToolbar';
 import TabelRuangan from '../components/DataMaster/Ruangan/TabelRuangan';
 import customers from '../__mocks__/customers';
 
@@ -17,7 +16,6 @@ const DataMahasiswa = () => (
       }}
     >
       <Container maxWidth={false}>
-        <CustomerListToolbar />
         <Box sx={{ pt: 3 }}>
           <TabelRuangan customers={customers} />
         </Box>

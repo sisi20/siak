@@ -1,3 +1,9 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable object-curly-spacing */
+/* eslint-disable object-curly-newline */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 import { useState, useEffect } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
@@ -16,12 +22,13 @@ import {
   SvgIcon,
   CardContent,
   TextField,
-  InputAdornment
+  InputAdornment,
+  AlertTitle,
+  Alert
 } from '@material-ui/core';
-import {
-  Edit, Trash2, Search, UserPlus
-} from 'react-feather';
+import {Edit, Trash2, Search, UserPlus } from 'react-feather';
 import { useNavigate, Link } from 'react-router-dom';
+import { ArrowBack } from '@material-ui/icons';
 
 const style = {
   position: 'absolute',
@@ -92,12 +99,20 @@ function CustomerListResults() {
           justifyContent: 'flex-end'
         }}
       >
-        <Link to="/app/tambahMahasiswa">
+        <Link to="/app/master">
           <Button color="primary" variant="contained">
             <SvgIcon fontSize="small" color="action">
-              <UserPlus color="white" />
+              <ArrowBack color="white" />
             </SvgIcon>
-            &nbsp; Add Mahasiswa
+            &nbsp; Kembali
+          </Button>
+        </Link>
+        <Link to="/app/formMatkul">
+          <Button color="primary" variant="contained">
+            <SvgIcon fontSize="small" color="action">
+              <UserPlus />
+            </SvgIcon>
+            &nbsp; Add Matakuliah
           </Button>
         </Link>
       </Box>
@@ -125,80 +140,155 @@ function CustomerListResults() {
           </CardContent>
         </Card>
       </Box>
-      <Box sx={{ mt: 3 }}>
-        <Card>
-          <PerfectScrollbar>
-            <Box sx={{ minWidth: 1050 }}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>No.</TableCell>
-                    <TableCell>Kode Matakuliah</TableCell>
-                    <TableCell>Matakuliah</TableCell>
-                    <TableCell>Aksi</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {matkul.filter((data) => data.matakuliah.toLowerCase().includes(search)).slice(page * limit, limit * page + limit).map((customer, i) => (
-                    <TableRow hover key={customer.id}>
-                      <TableCell>{i + 1}</TableCell>
-                      <TableCell>{customer.kode}</TableCell>
-                      <TableCell>{customer.matakuliah}</TableCell>
-                      <TableCell>
-                        <Stack direction="row" spacing={2}>
-                          <Button
-                            variant="outlined"
-                            startIcon={<Trash2 />}
-                            onClick={() => handleOpen(customer._id)}
-                          >
-                            Delete
-                          </Button>
-                          <Button
-                            variant="contained"
-                            endIcon={<Edit />}
-                            onClick={() => editForm(customer._id)}
-                          >
-                            Edit
-                          </Button>
-                        </Stack>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </PerfectScrollbar>
-          <TablePagination
-            component="div"
-            count={matkul.length}
-            onPageChange={handlePageChange}
-            onRowsPerPageChange={handleLimitChange}
-            page={page}
-            rowsPerPage={limit}
-            rowsPerPageOptions={[5, 10, 25]}
-          />
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Apakah yakin akan menghapus ?
-              </Typography>
-              <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
-                <Button variant="outlined" onClick={() => deleteData(itemID)}>
-                  ya
-                </Button>
-                <Button variant="outlined" onClick={handleClose}>
-                  Tidak
-                </Button>
+      {matkul.length === 0 ? (
+        <>
+          <Box sx={{ mt: 3 }}>
+            <Card>
+              <Stack sx={{ width: '100%' }} spacing={2}>
+                <Alert severity="info">
+                  <AlertTitle>Info</AlertTitle>
+                  Tabel Matakuliah — <strong> KOSONG</strong>
+                </Alert>
               </Stack>
-            </Box>
-          </Modal>
-        </Card>
-      </Box>
+            </Card>
+          </Box>
+          <Box sx={{ mt: 3 }}>
+            <Card>
+              <PerfectScrollbar>
+                <Box sx={{ minWidth: 1050 }}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>No.</TableCell>
+                        <TableCell>Ruangan</TableCell>
+
+                        <TableCell>Aksi</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody></TableBody>
+                  </Table>
+                </Box>
+              </PerfectScrollbar>
+              <TablePagination
+                component="div"
+                count={matkul.length}
+                onPageChange={handlePageChange}
+                onRowsPerPageChange={handleLimitChange}
+                page={page}
+                rowsPerPage={limit}
+                rowsPerPageOptions={[5, 10, 25]}
+              />
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Apakah yakin akan menghapus ?
+                  </Typography>
+                  <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+                    <Button
+                      variant="outlined"
+                      onClick={() => deleteData(itemID)}
+                    >
+                      ya
+                    </Button>
+                    <Button variant="outlined" onClick={handleClose}>
+                      Tidak
+                    </Button>
+                  </Stack>
+                </Box>
+              </Modal>
+            </Card>
+          </Box>
+        </>
+      ) : (
+        <Box sx={{ mt: 3 }}>
+          <Card>
+            <PerfectScrollbar>
+              <Box sx={{ minWidth: 1050 }}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>No.</TableCell>
+                      <TableCell>Kode Matakuliah</TableCell>
+                      <TableCell>Matakuliah</TableCell>
+                      <TableCell>Aksi</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {matkul
+                      .filter((data) =>
+                        data.matakuliah.toLowerCase().includes(search)
+                      )
+                      .slice(page * limit, limit * page + limit)
+                      .map((customer, i) => (
+                        <TableRow hover key={customer.id}>
+                          <TableCell>{i + 1}</TableCell>
+                          <TableCell>{customer.kode}</TableCell>
+                          <TableCell>{customer.matakuliah}</TableCell>
+                          <TableCell>
+                            <Stack direction="row" spacing={2}>
+                              <Button
+                                variant="outlined"
+                                startIcon={<Trash2 />}
+                                onClick={() => handleOpen(customer._id)}
+                              >
+                                Delete
+                              </Button>
+                              <Button
+                                variant="contained"
+                                endIcon={<Edit />}
+                                onClick={() => editForm(customer._id)}
+                              >
+                                Edit
+                              </Button>
+                            </Stack>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </Box>
+            </PerfectScrollbar>
+            <TablePagination
+              component="div"
+              count={matkul.length}
+              onPageChange={handlePageChange}
+              onRowsPerPageChange={handleLimitChange}
+              page={page}
+              rowsPerPage={limit}
+              rowsPerPageOptions={[5, 10, 25]}
+            />
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Apakah yakin akan menghapus ?
+                </Typography>
+                <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+                  <Button variant="outlined" onClick={() => deleteData(itemID)}>
+                    ya
+                  </Button>
+                  <Button variant="outlined" onClick={handleClose}>
+                    Tidak
+                  </Button>
+                </Stack>
+              </Box>
+            </Modal>
+          </Card>
+        </Box>
+      )}
     </Box>
   );
 }

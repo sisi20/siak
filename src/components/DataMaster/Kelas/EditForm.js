@@ -27,6 +27,7 @@ const AccountProfileDetails = (props) => {
     );
     const kelas = await response.json();
     setContent(kelas);
+    setMatkul(kelas.id_matakuliah);
   };
 
   useEffect(() => {
@@ -104,7 +105,6 @@ const AccountProfileDetails = (props) => {
                     {...params}
                     label="Matakuliah"
                     placeholder="Pilih Matakuliah"
-                    focused
                   />
                 )}
               />

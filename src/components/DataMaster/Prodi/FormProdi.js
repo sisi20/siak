@@ -42,7 +42,7 @@ const AccountProfileDetails = (props) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         id: new Date().getTime(),
-        nama_prodi: prodi.nama_prodi
+        nama_prodi: prodi.nama_prodi.trim()
       })
     }).then((result) => {
       console.log(result);

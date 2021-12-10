@@ -43,8 +43,8 @@ const AccountProfileDetails = (props) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         id: new Date().getTime(),
-        kode: matkul.kode,
-        matakuliah: matkul.matakuliah
+        kode: matkul.kode.trim(),
+        matakuliah: matkul.matakuliah.trim()
       })
     }).then((result) => {
       if (result.status === 412) {

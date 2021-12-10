@@ -41,7 +41,7 @@ const AccountProfileDetails = (props) => {
     fetch('https://limitless-ocean-86312.herokuapp.com/api/ruangan', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: new Date().getTime(), ruang: ruang.ruang })
+      body: JSON.stringify({ id: new Date().getTime(), ruang: ruang.ruang.trim() })
     }).then((result) => {
       if (result.status === 412) {
         handleOpen();

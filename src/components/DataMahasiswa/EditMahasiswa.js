@@ -47,19 +47,6 @@ const AccountProfileDetails = (props) => {
     foto: null,
     image: null
   });
-  const { id } = useParams();
-
-  const getPostById = async () => {
-    const response = await fetch(
-      `https://limitless-ocean-86312.herokuapp.com/api/datamhs/${id}`
-    );
-    const mhs = await response.json();
-    setMahasiswa(mhs);
-  };
-
-  useEffect(() => {
-    getPostById();
-  }, []);
 
   const [Kls, setKls] = useState('');
   const [Kcmtn, setKcmtn] = useState('');
@@ -70,6 +57,21 @@ const AccountProfileDetails = (props) => {
   const [Ktmu, setKtmu] = useState('');
   const [Prd, setPrd] = useState('');
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const getPostById = async () => {
+    const response = await fetch(
+      `https://limitless-ocean-86312.herokuapp.com/api/datamhs/${id}`
+    );
+    const mhs = await response.json();
+    setMahasiswa(mhs);
+    setKls(mhs.id_kelas);
+    setPrd(mhs.id_prodi);
+  };
+
+  useEffect(() => {
+    getPostById();
+  }, []);
 
   function submit(e) {
     e.preventDefault();
@@ -245,7 +247,6 @@ const AccountProfileDetails = (props) => {
                           {...params}
                           label="Program Studi"
                           placeholder="Pilih Prodi"
-                          focused
                         />
                       )}
                     />
@@ -520,7 +521,6 @@ const AccountProfileDetails = (props) => {
                           {...params}
                           label="Kelas"
                           placeholder="Pilih Kelas"
-                          focused
                         />
                       )}
                     />

@@ -76,15 +76,15 @@ const AccountProfileDetails = (props) => {
   function submit(e) {
     e.preventDefault();
     const form = new FormData(e.target);
-    form.append('foto', Mahasiswa.foto);
-    form.append('kecamatanmu', Kcmtnmu.nama);
-    form.append('kecamatan', Kcmtn.nama);
-    form.append('kotamu', Ktmu.nama);
-    form.append('kota', Kt.nama);
-    form.append('provinsimu', Prvnmu.nama);
-    form.append('provinsi', Prvn.nama);
-    form.append('id_kelas', Kls._id);
-    form.append('id_prodi', Prd._id);
+    form.append('foto', Mahasiswa.foto.trim());
+    form.append('kecamatanmu', Kcmtnmu.nama.trim());
+    form.append('kecamatan', Kcmtn.nama.trim());
+    form.append('kotamu', Ktmu.nama.trim());
+    form.append('kota', Kt.nama.trim());
+    form.append('provinsimu', Prvnmu.nama.trim());
+    form.append('provinsi', Prvn.nama.trim());
+    form.append('id_kelas', Kls._id.trim());
+    form.append('id_prodi', Prd._id.trim());
 
     axios
       .post('https://limitless-ocean-86312.herokuapp.com/api/datamhs', form, {
@@ -265,13 +265,20 @@ const AccountProfileDetails = (props) => {
                   </Grid>
                   <Grid item md={4} xs={12}>
                     <Autocomplete
+                      disableCloseOnSelect
                       id="tags-outlined"
                       options={Provinsi}
                       getOptionLabel={(option) => option.nama || ''}
                       filterSelectedOptions
                       onChange={(e, value) => {
-                        setPrvnmu(value);
-                        getKota(value.id);
+                        if (value) {
+                          setPrvnmu(value);
+                          getKota(value.id);
+                        } else {
+                          setPrvnmu({});
+                          setKtmu({});
+                          setKcmtnmu({});
+                        }
                       }}
                       value={Prvnmu}
                       renderInput={(params) => (
@@ -290,8 +297,13 @@ const AccountProfileDetails = (props) => {
                       getOptionLabel={(option) => option.nama || ''}
                       filterSelectedOptions
                       onChange={(e, value) => {
-                        setKtmu(value);
-                        getKecamatan(value.id);
+                        if (value) {
+                          setKtmu(value);
+                          getKecamatan(value.id);
+                        } else {
+                          setKtmu({});
+                          setKcmtnmu({});
+                        }
                       }}
                       value={Ktmu}
                       renderInput={(params) => (
@@ -309,7 +321,13 @@ const AccountProfileDetails = (props) => {
                       options={Kecamatan}
                       getOptionLabel={(option) => option.nama || ''}
                       filterSelectedOptions
-                      onChange={(e, value) => setKcmtnmu(value)}
+                      onChange={(e, value) => {
+                        if (value) {
+                          setKcmtnmu(value);
+                        } else {
+                          setKcmtnmu({});
+                        }
+                      }}
                       value={Kcmtnmu}
                       renderInput={(params) => (
                         <TextField
@@ -368,8 +386,14 @@ const AccountProfileDetails = (props) => {
                       getOptionLabel={(option) => option.nama || ''}
                       filterSelectedOptions
                       onChange={(e, value) => {
-                        setPrvn(value);
-                        getKota(value.id);
+                        if (value) {
+                          setPrvn(value);
+                          getKota(value.id);
+                        } else {
+                          setPrvn({});
+                          setKt({});
+                          setKcmtn({});
+                        }
                       }}
                       value={Prvn}
                       renderInput={(params) => (
@@ -388,8 +412,13 @@ const AccountProfileDetails = (props) => {
                       getOptionLabel={(option) => option.nama || ''}
                       filterSelectedOptions
                       onChange={(e, value) => {
-                        setKt(value);
-                        getKecamatan(value.id);
+                        if (value) {
+                          setKt(value);
+                          getKecamatan(value.id);
+                        } else {
+                          setKt({});
+                          setKcmtn({});
+                        }
                       }}
                       value={Kt}
                       renderInput={(params) => (
@@ -407,7 +436,13 @@ const AccountProfileDetails = (props) => {
                       options={Kecamatan}
                       getOptionLabel={(option) => option.nama || ''}
                       filterSelectedOptions
-                      onChange={(e, value) => setKcmtn(value)}
+                      onChange={(e, value) => {
+                        if (value) {
+                          setKcmtn(value);
+                        } else {
+                          setKcmtn({});
+                        }
+                      }}
                       value={Kcmtn}
                       renderInput={(params) => (
                         <TextField
@@ -483,9 +518,10 @@ const AccountProfileDetails = (props) => {
                       <FormLabel component="legend">Gender</FormLabel>
                       <RadioGroup
                         aria-label="gender"
+                        defaultValue="Laki - laki"
                         name="jenis_kelamin"
-                        value={Mahasiswa.jenis_kelamin}
                         onChange={(e) => handel(e)}
+                        value={Mahasiswa.jenis_kelamin}
                       >
                         <FormControlLabel
                           value="Laki - laki"

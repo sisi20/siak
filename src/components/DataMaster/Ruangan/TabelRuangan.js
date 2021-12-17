@@ -104,22 +104,24 @@ function CustomerListResults() {
           justifyContent: 'flex-end'
         }}
       >
-        <Link to="/app/master" spacing={2}>
-          <Button color="primary" variant="contained">
-            <SvgIcon fontSize="small" color="action">
-              <ArrowBack color="white" />
-            </SvgIcon>
-            &nbsp; Kembali
-          </Button>
-        </Link>
-        <Link to="/app/formRuangan">
-          <Button color="primary" variant="contained">
-            <SvgIcon fontSize="small" color="action">
-              <UserPlus />
-            </SvgIcon>
-            &nbsp; Add Ruangan
-          </Button>
-        </Link>
+        <Stack direction="row" spacing={2}>
+          <Link to="/app/master" spacing={2}>
+            <Button color="primary" variant="contained">
+              <SvgIcon fontSize="small" color="action">
+                <ArrowBack color="white" />
+              </SvgIcon>
+              &nbsp; Kembali
+            </Button>
+          </Link>
+          <Link to="/app/formRuangan">
+            <Button color="primary" variant="contained">
+              <SvgIcon fontSize="small" color="action">
+                <UserPlus />
+              </SvgIcon>
+              &nbsp; Add Ruangan
+            </Button>
+          </Link>
+        </Stack>
       </Box>
       <Box sx={{ mt: 3 }}>
         <Card>
@@ -147,16 +149,14 @@ function CustomerListResults() {
       </Box>
       {ruangan.length === 0 ? (
         <>
-          <Box
-           sx={{ mt: 3 }}
-          >
+          <Box sx={{ mt: 3 }}>
             <Card>
-            <Stack sx={{ width: '100%' }} spacing={2}>
-              <Alert severity="info">
-                <AlertTitle>Info</AlertTitle>
-                Tabel Ruangan — <strong> KOSONG</strong>
-              </Alert>
-            </Stack>
+              <Stack sx={{ width: '100%' }} spacing={2}>
+                <Alert severity="info">
+                  <AlertTitle>Info</AlertTitle>
+                  Tabel Ruangan — <strong> KOSONG</strong>
+                </Alert>
+              </Stack>
             </Card>
           </Box>
           <Box sx={{ mt: 3 }}>
@@ -172,9 +172,7 @@ function CustomerListResults() {
                         <TableCell>Aksi</TableCell>
                       </TableRow>
                     </TableHead>
-                    <TableBody>
-
-                    </TableBody>
+                    <TableBody></TableBody>
                   </Table>
                 </Box>
               </PerfectScrollbar>

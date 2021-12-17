@@ -26,7 +26,7 @@ import {
   Alert,
   AlertTitle
 } from '@material-ui/core';
-import {Edit, Trash2, Search, UserPlus } from 'react-feather';
+import { Edit, Trash2, Search, UserPlus } from 'react-feather';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowBack } from '@material-ui/icons';
 
@@ -102,23 +102,25 @@ function CustomerListResults() {
           justifyContent: 'flex-end'
         }}
       >
-        <Link to="/app/master">
-          <Button color="primary" variant="contained">
-            <SvgIcon fontSize="small" color="action">
-              <ArrowBack color="white" />
-            </SvgIcon>
-            &nbsp; Kembali
-          </Button>
-        </Link>
+        <Stack direction="row" spacing={2}>
+          <Link to="/app/master">
+            <Button color="primary" variant="contained">
+              <SvgIcon fontSize="small" color="action">
+                <ArrowBack color="white" />
+              </SvgIcon>
+              &nbsp; Kembali
+            </Button>
+          </Link>
 
-        <Link to="/app/formKelas">
-          <Button color="primary" variant="contained">
-            <SvgIcon fontSize="small" color="action">
-              <UserPlus />
-            </SvgIcon>
-            &nbsp; Add Kelas
-          </Button>
-        </Link>
+          <Link to="/app/formKelas">
+            <Button color="primary" variant="contained">
+              <SvgIcon fontSize="small" color="action">
+                <UserPlus />
+              </SvgIcon>
+              &nbsp; Add Kelas
+            </Button>
+          </Link>
+        </Stack>
       </Box>
       <Box sx={{ mt: 3 }}>
         <Card>

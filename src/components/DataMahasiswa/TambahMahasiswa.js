@@ -41,7 +41,7 @@ const AccountProfileDetails = (props) => {
     nik: '',
     nama_depan: '',
     nama_belakang: '',
-    jenis_kelamin: '',
+    jenis_kelamin: 'Laki - laki',
     email: '',
     alamat: '',
     noTelp: '',
@@ -76,15 +76,15 @@ const AccountProfileDetails = (props) => {
   function submit(e) {
     e.preventDefault();
     const form = new FormData(e.target);
-    form.append('foto', Mahasiswa.foto.trim());
-    form.append('kecamatanmu', Kcmtnmu.nama.trim());
-    form.append('kecamatan', Kcmtn.nama.trim());
-    form.append('kotamu', Ktmu.nama.trim());
-    form.append('kota', Kt.nama.trim());
-    form.append('provinsimu', Prvnmu.nama.trim());
-    form.append('provinsi', Prvn.nama.trim());
-    form.append('id_kelas', Kls._id.trim());
-    form.append('id_prodi', Prd._id.trim());
+    form.append('foto', Mahasiswa.foto);
+    form.append('kecamatanmu', Kcmtnmu.nama);
+    form.append('kecamatan', Kcmtn.nama);
+    form.append('kotamu', Ktmu.nama);
+    form.append('kota', Kt.nama);
+    form.append('provinsimu', Prvnmu.nama);
+    form.append('provinsi', Prvn.nama);
+    form.append('id_kelas', Kls._id);
+    form.append('id_prodi', Prd._id);
 
     axios
       .post('https://limitless-ocean-86312.herokuapp.com/api/datamhs', form, {

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { Helmet } from 'react-helmet-async';
 import { Box, Container } from '@material-ui/core';
 import TabelKelas from '../components/DataMaster/Kelas/TabelKelas';

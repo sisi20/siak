@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 import { Navigate } from 'react-router-dom';
 import DashboardLayout from './components/DashboardLayout';
 import MainLayout from './components/MainLayout';
@@ -21,6 +23,7 @@ import EditKelas from './pages/EditKelas';
 import EditProdi from './pages/EditProdi';
 import EditMahasiswa from './pages/EditMahasiswa';
 import DitailMahasiswa from './pages/DitailMahasiswa';
+import Login from './pages/Login';
 
 const routes = [
   {
@@ -47,6 +50,7 @@ const routes = [
       { path: 'editProdi/:id', element: <EditProdi /> },
       { path: 'editMhs/:id', element: <EditMahasiswa /> },
       { path: 'ditailMhs/:id', element: <DitailMahasiswa /> },
+      { path: 'login', element: <Login /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
@@ -55,7 +59,7 @@ const routes = [
     element: <MainLayout />,
     children: [
       { path: '/', element: <Navigate to="/app/dataMahasiswa" /> },
-      { path: '*', element: <Navigate to="/404" /> }
+      { path: 'login', element: <Login /> },
     ]
   }
 ];

@@ -153,7 +153,7 @@ function CustomerListResults() {
               <Stack sx={{ width: '100%' }} spacing={2}>
                 <Alert severity="info">
                   <AlertTitle>Info</AlertTitle>
-                  Tabel Ruangan — <strong> KOSONG</strong>
+                  Tabel Kelas — <strong> KOSONG</strong>
                 </Alert>
               </Stack>
             </Card>

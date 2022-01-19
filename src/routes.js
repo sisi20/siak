@@ -58,7 +58,7 @@ const routes = [
     path: '/',
     element: <MainLayout />,
     children: [
-      { path: '/', element: <Navigate to="/app/dataMahasiswa" /> },
+      { path: '/', element: <Navigate to="/login" /> },
       { path: 'login', element: <Login /> },
     ]
   }

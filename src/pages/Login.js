@@ -98,7 +98,7 @@ export default function SignInSide() {
                   fullWidth
                   value={email}
                   name="email"
-                  label="Masukkan Username/Email"
+                  label="Masukkan Email"
                   type="email"
                   id=""
                   onChange={(e) => setEmail(e.target.value)}

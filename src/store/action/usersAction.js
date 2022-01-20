@@ -1,14 +1,14 @@
-/* eslint-disable function-paren-newline */
 /* eslint-disable object-shorthand */
 /* eslint-disable no-return-await */
 /* eslint-disable arrow-body-style */
+/* eslint-disable eol-last */
 const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json'
 };
-
 export const methodDELETE = async ({ endpoint }) => {
-  return await fetch(`https://calm-savannah-30077.herokuapp.com/api${endpoint}`,
+  return await fetch(
+    `https://calm-savannah-30077.herokuapp.com/api${endpoint}`,
     {
       method: 'DELETE',
       headers: headers
@@ -19,7 +19,6 @@ export const methodDELETE = async ({ endpoint }) => {
       console.error('err', err);
     });
 };
-
 export const methodGETImage = async ({ endpoint }) => {
   return await fetch(
     `https://calm-savannah-30077.herokuapp.com/gambar${endpoint}`,
@@ -123,7 +122,9 @@ export const methodPOSTSignIn = async ({ endpoint, body }) => {
       body: JSON.stringify(body)
     }
   )
-    .then((res) => res.json())
+    .then((res) => {
+      return res.json();
+    })
     .catch((err) => {
       console.error('err', err);
     });

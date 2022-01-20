@@ -1,3 +1,8 @@
+/* eslint-disable react/jsx-indent */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable object-curly-newline */
+/* eslint-disable object-curly-spacing */
+/* eslint-disable jsx-a11y/heading-has-content */
 import { useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,17 +15,12 @@ import {
   List,
   Typography
 } from '@material-ui/core';
-import {
-  CheckSquare,
-  Folder,
-  Server,
-  Users as UsersIcon
-} from 'react-feather';
+import { CheckSquare, Folder, Server, Users as UsersIcon } from 'react-feather';
 import NavItem from './NavItem';
 
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Senior Developer',
+  jobTitle: '',
   name: 'Katarina Smith'
 };
 
@@ -44,7 +44,7 @@ const items = [
     href: '/app/master',
     icon: Server,
     title: 'Data Master'
-  },
+  }
 ];
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
@@ -82,17 +82,13 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           }}
           to="/app/account"
         />
+
         <Typography
           color="textPrimary"
           variant="h5"
+          value={window.sessionStorage.getItem('key')}
         >
-          {user.name}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.jobTitle}
+          {window.sessionStorage.getItem('key')}
         </Typography>
       </Box>
       <Divider />
@@ -154,8 +150,7 @@ DashboardSidebar.propTypes = {
 };
 
 DashboardSidebar.defaultProps = {
-  onMobileClose: () => {
-  },
+  onMobileClose: () => {},
   openMobile: false
 };
 
